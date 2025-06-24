@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/complete_logo.png</file>
+        <file>images/icons/appointment-new.svg</file>
+        <file>images/icons/audio-x-generic.png</file>
+        <file>images/icons/audio-x-mpegurl.png</file>
+        <file>images/icons/clock.svg</file>
+        <file>images/icons/document-properties.svg</file>
+        <file>images/icons/document-revert.png</file>
+        <file>images/icons/document-save.png</file>
+        <file>images/icons/emblem-favorite.png</file>
+        <file>images/icons/folder.png</file>
+        <file>images/icons/go-next.svg</file>
+        <file>images/icons/go-previous.svg</file>
+        <file>images/icons/help-contents.svg</file>
+        <file>images/icons/help-hint.svg</file>
+        <file>images/icons/media-playback-start.svg</file>
+        <file>images/icons/media-playback-stop.svg</file>
+        <file>images/icons/media-skip-forward.svg</file>
+        <file>images/icons/preferences-system-sharing.png</file>
+        <file>images/icons/preferences-system-time.png</file>
+        <file>images/icons/process-stop.svg</file>
+        <file>images/icons/system-component-codecs.png</file>
+        <file>images/icons/audio-input-microphone.svg</file>
+        <file>images/icons/edit-clear.svg</file>
+        <file>images/icons/edit-copy.svg</file>
+        <file>images/icons/edit-cut.svg</file>
+        <file>images/icons/edit-delete.svg</file>
+        <file>images/icons/emblem-important.svg</file>
+        <file>images/icons/emblem-symbolic-link.svg</file>
+        <file>images/icons/emblem-ubuntuone-synchronized.svg</file>
+        <file>images/icons/go-bottom.svg</file>
+        <file>images/icons/go-down.svg</file>
+        <file>images/icons/go-last.svg</file>
+        <file>images/icons/gtk-edit.svg</file>
+        <file>images/icons/list-add.svg</file>
+        <file>images/icons/list-remove.svg</file>
+        <file>images/icons/preferences-desktop-sound.svg</file>
+        <file>languages/en_US.qm</file>
+        <file>languages/pt_BR.qm</file>
+        <file>images/icons/language.png</file>
+        <file>images/penguin_logo.png</file>
+        <file>images/splash-01.png</file>
+        <file>images/splash-02.png</file>
+        <file>images/brazil-brand.png</file>
+    </qresource>
+</RCC>
