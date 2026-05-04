@@ -1,4 +1,4 @@
-# LaraRadio 🎙️
+# LaraRadio
 
 [🇧🇷 Português](README.pt-BR.md) | [🇪🇸 Español](README.es.md)
 
@@ -7,7 +7,7 @@ It focuses on simplicity, performance, and reliability for small to medium radio
 
 ---
 
-## 🚀 Overview
+## Overview
 
 LaraRadio was designed with a pragmatic engineering mindset:
 
@@ -18,7 +18,7 @@ LaraRadio was designed with a pragmatic engineering mindset:
 
 ---
 
-## 🧠 Tech Stack
+## Tech Stack
 
 ### C++ (C++20)
 The core is implemented in modern C++, providing:
@@ -43,7 +43,7 @@ Handles decoding and playback:
 
 ---
 
-## 🏗️ Build Instructions
+## Build Instructions
 
 ### Requirements
 
@@ -80,14 +80,14 @@ make -j$(nproc)
 
 ---
 
-## 📦 Distribution
+## Distribution
 
 - AppImage (primary)
 - Flatpak (planned)
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions:
 
@@ -98,6 +98,6 @@ We welcome contributions:
 
 ---
 
-## 🌐 Website
+## Website
 
 https://lararadio.com

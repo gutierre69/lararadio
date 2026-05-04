@@ -1,4 +1,4 @@
-# LaraRadio 🎙️
+# LaraRadio
 
 [🇺🇸 English](README.md) | [🇪🇸 Español](README.es.md)
 
@@ -6,7 +6,7 @@ O LaraRadio é um software de automação de rádio leve e eficiente para Linux.
 
 ---
 
-## 🚀 Visão Geral
+## Visão Geral
 
 Projetado com foco em engenharia prática:
 
@@ -17,7 +17,7 @@ Projetado com foco em engenharia prática:
 
 ---
 
-## 🧠 Tecnologias
+## Tecnologias
 
 ### C++ (C++20)
 
@@ -39,7 +39,7 @@ Projetado com foco em engenharia prática:
 
 ---
 
-## 🏗️ Build
+## Build
 
 ### Requisitos
 
@@ -76,14 +76,14 @@ make -j$(nproc)
 
 ---
 
-## 📦 Distribuição
+## Distribuição
 
 - AppImage
 - Flatpak (futuro)
 
 ---
 
-## 🤝 Contribuição
+## Contribuição
 
 - Correção de bugs
 - Melhorias de performance
@@ -92,6 +92,6 @@ make -j$(nproc)
 
 ---
 
-## 🌐 Site
+## Site
 
 https://lararadio.com
