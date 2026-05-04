@@ -19,7 +19,7 @@ Projetado com foco em engenharia prática:
 
 ## Tecnologias
 
-### C++ (C++20)
+### C++
 
 - Alta performance
 - Controle de memória
@@ -44,16 +44,19 @@ Projetado com foco em engenharia prática:
 ### Requisitos
 
 - GCC 11+ ou Clang
-- CMake 3.20+
-- Qt 6
-- FFmpeg
+- CMake 3.16+
+- Qt 6.8+ (Quick, Widgets, Multimedia, MultimediaWidgets)
+- TagLib
+- Suporte FFmpeg em tempo de execução para o Qt Multimedia
 
 ### Ubuntu
 
 ```bash
 sudo apt update
-sudo apt install build-essential cmake qt6-base-dev qt6-multimedia-dev ffmpeg
+sudo apt install build-essential cmake ninja-build qt6-base-dev qt6-declarative-dev qt6-multimedia-dev libtag1-dev ffmpeg
 ```
+
+Se a sua versão do Ubuntu não fornecer Qt 6.8 ou superior, instale o Qt pelo instalador oficial e garanta que o CMake encontre essa instalação.
 
 ### Compilação
 
@@ -65,13 +68,13 @@ mkdir build
 cd build
 
 cmake ..
-make -j$(nproc)
+cmake --build . -j$(nproc)
 ```
 
 ### Execução
 
 ```bash
-./lararadio
+./appLaraRadio
 ```
 
 ---

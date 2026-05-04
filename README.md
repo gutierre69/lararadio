@@ -20,7 +20,7 @@ LaraRadio was designed with a pragmatic engineering mindset:
 
 ## Tech Stack
 
-### C++ (C++20)
+### C++
 The core is implemented in modern C++, providing:
 
 - High performance and low latency
@@ -48,16 +48,19 @@ Handles decoding and playback:
 ### Requirements
 
 - GCC 11+ or Clang
-- CMake 3.20+
-- Qt 6 (Core, Widgets, Multimedia)
-- FFmpeg
+- CMake 3.16+
+- Qt 6.8+ (Quick, Widgets, Multimedia, MultimediaWidgets)
+- TagLib
+- FFmpeg runtime support for Qt Multimedia
 
 ### Ubuntu example
 
 ```bash
 sudo apt update
-sudo apt install build-essential cmake qt6-base-dev qt6-multimedia-dev ffmpeg
+sudo apt install build-essential cmake ninja-build qt6-base-dev qt6-declarative-dev qt6-multimedia-dev libtag1-dev ffmpeg
 ```
+
+If your Ubuntu release does not provide Qt 6.8 or newer, install Qt from the official Qt installer and make sure CMake can find that Qt installation.
 
 ### Build
 
@@ -69,13 +72,13 @@ mkdir build
 cd build
 
 cmake ..
-make -j$(nproc)
+cmake --build . -j$(nproc)
 ```
 
 ### Run
 
 ```bash
-./lararadio
+./appLaraRadio
 ```
 
 ---
