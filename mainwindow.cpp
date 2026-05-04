@@ -34,6 +34,10 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     this->setFocusPolicy(Qt::StrongFocus);
     this->setFocus();
 
+    //this->setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
+    //this->setAttribute(Qt::WA_TranslucentBackground);
+
+
     QScreen *screen = QApplication::primaryScreen();
     if (screen) {
         QRect screenGeometry = screen->availableGeometry();
@@ -88,6 +92,8 @@ void MainWindow::initConfig()
 
 void MainWindow::init()
 {
+    m_uiReady = false;
+
     translator = new QTranslator(this);
     qApp->removeTranslator(translator);
     if(translator->load(":/languages/"+settings->value("interface/language", "en_US").toString()+".qm")){
@@ -136,9 +142,8 @@ void MainWindow::init()
     //connect(ui->jingle_files, &QTreeView::doubleClicked, this, &MainWindow::onJingleFilesItemDoubleClicked);
     connect(ui->audio_list, &QTreeWidget::doubleClicked, this, &MainWindow::onPlaylistItemDoubleClicked);
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::updateDisplay);
-    timer->start(10);
+    m_displayTimer = new QTimer(this);
+    connect(m_displayTimer, &QTimer::timeout, this, &MainWindow::updateDisplay);
 
     QTimer *fadeTimer = new QTimer(this);
     connect(fadeTimer, &QTimer::timeout, this, &MainWindow::flash);
@@ -168,7 +173,6 @@ void MainWindow::init()
     connect(ui->audio_list, &QTreeWidget::customContextMenuRequested, this, &MainWindow::audioOptionsMenu); // use new syntax for more joy
 
     directoryViewer();
-    loadRecentPlaylist();
 
     connect(ui->menu_about_lara, &QAction::triggered, this, &MainWindow::showAboutDialog);
     connect(ui->actionReleases, &QAction::triggered, this, [=]() {
@@ -208,6 +212,23 @@ void MainWindow::init()
 
         buttonHole.push_back( bh );
     }
+
+    m_uiReady = true;
+    if (m_displayTimer) {
+        m_displayTimer->start(10);
+    }
+}
+
+void MainWindow::showEvent(QShowEvent *event)
+{
+    QMainWindow::showEvent(event);
+
+    if (m_recentPlaylistLoaded) {
+        return;
+    }
+
+    m_recentPlaylistLoaded = true;
+    QTimer::singleShot(0, this, &MainWindow::loadRecentPlaylist);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
@@ -794,6 +815,10 @@ void MainWindow::on_btn_add_time_item_clicked()
 }
 
 void MainWindow::updateDisplay() {
+    if (!m_uiReady || !ui || !vuMeterL || !vuMeterR) {
+        return;
+    }
+
     vuMeterL->setLevel(currentVU_L);
     vuMeterR->setLevel(currentVU_R);
 }
@@ -1027,4 +1052,17 @@ void MainWindow::loadPlaylist()
             QMessageBox::critical(this, tr("Erro"), tr("Não foi possível carregar a playlist."));
         }
     }
+}
+
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    // QPainter p(this);
+    // p.setRenderHint(QPainter::Antialiasing);
+
+    // QBrush brush(QColor("#2d283c"));
+    // p.setBrush(brush);
+    // p.setPen(Qt::NoPen);
+
+    // QRect rect = this->rect();
+    // p.drawRoundedRect(rect, 15, 15);
 }

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=LaraRadio
+Exec=LaraRadio
+Icon=com.gutierre69.LaraRadio
+Categories=AudioVideo;Audio;Player;
+Comment=Radio automation and audio playback software
+Terminal=false
+StartupNotify=true
+StartupWMClass=LaraRadio
+Version=1.0
+X-AppImage-Version=1.0.4

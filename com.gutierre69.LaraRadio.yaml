@@ -1,0 +1,38 @@
+app-id: com.gutierre69.LaraRadio
+runtime: org.kde.Platform
+runtime-version: "6.6"
+sdk: org.kde.Sdk
+command: LaraRadio
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=pulseaudio
+  - --socket=wayland
+  - --socket=x11
+  - --filesystem=host:ro
+  - --device=all
+  - --env=QT_QPA_PLATFORMTHEME=gtk3
+  - --env=GTK_THEME=Adwaita:dark
+  - --env=QT_QUICK_CONTROLS_STYLE=org.kde.desktop
+
+modules:
+  - name: taglib
+    buildsystem: cmake
+    sources:
+      - type: archive
+        url: https://github.com/taglib/taglib/archive/refs/tags/v1.13.tar.gz
+        sha256: 02dc8820a8d6a63aa1ac1486c308e221d351a6c63cd7f842bda16d3bc350ff55
+
+  - name: LaraRadio
+    buildsystem: cmake
+    sources:
+      - type: dir
+        path: .
+    build-options:
+      env:
+        CMAKE_BUILD_TYPE: Release
+    build-commands:
+      - install -Dm644 data/com.gutierre69.LaraRadio.desktop /app/share/applications/com.gutierre69.LaraRadio.desktop
+      - install -Dm644 data/io.gitlab.gutierre69.LaraRadio.svg /app/share/icons/hicolor/scalable/apps/io.gitlab.gutierre69.LaraRadio.svg
+      - install -Dm644 data/com.gutierre69.LaraRadio.metainfo.xml /app/share/metainfo/com.gutierre69.LaraRadio.metainfo.xml
+

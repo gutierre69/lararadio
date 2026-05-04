@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 
+
+
 # Versão principal
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
 set(PROJECT_VERSION_PATCH 4)
 
 # Caminho do arquivo de build number
-set(BUILD_NUMBER_FILE "${CMAKE_CURRENT_BINARY_DIR}/build_number.txt")
+# set(BUILD_NUMBER_FILE "${CMAKE_CURRENT_BINARY_DIR}/build_number.txt")
+set(BUILD_NUMBER_FILE "${CMAKE_SOURCE_DIR}/.build_number.txt")
 
 # Lê build number do arquivo ou inicia em 0
 if(EXISTS ${BUILD_NUMBER_FILE})
@@ -36,6 +39,7 @@ configure_file(
 message(STATUS "Build version: ${PROJECT_FULL_VERSION}")
 
 project(appLaraRadio VERSION ${PROJECT_VERSION} LANGUAGES CXX)
+
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

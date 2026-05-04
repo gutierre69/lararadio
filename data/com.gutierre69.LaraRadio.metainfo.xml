@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.gutierre69.LaraRadio</id>
+  <name>LaraRadio</name>
+  <summary>Radio automation software</summary>
+  <description>
+    <p>
+      LaraRadio is a lightweight and flexible radio automation and music playback tool.
+      It supports playlists, scheduled playback, jingles, and more.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.gutierre69.LaraRadio.desktop</launchable>
+  <provides>
+    <binary>LaraRadio</binary>
+  </provides>
+  <developer_name>Carlos Gutierre</developer_name>
+  <url type="homepage">https://gitlab.com/gutierre69/lararadio</url>
+  <url type="bugtracker">https://gitlab.com/gutierre69/lararadio/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://gutierre.dev/screenshots/lararadio-main.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.0.4" date="2025-06-21"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>
+

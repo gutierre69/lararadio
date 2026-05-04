@@ -22,8 +22,10 @@
 #include <QSettings>
 #include <QCoreApplication>
 #include <QKeyEvent>
+#include <QShowEvent>
 #include <QTranslator>
 #include <QPainter>
+#include <QPaintEvent>
 #include "version.h"
 
 #include "taglib/tag.h"
@@ -42,6 +44,8 @@ typedef struct Playlist
     QString type = "";
 } Playlist;
 
+class QTimer;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -52,6 +56,8 @@ public:
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
+    void paintEvent(QPaintEvent *) override;
+    void showEvent(QShowEvent *event) override;
 
 public slots:
     void directoryViewer();
@@ -148,5 +154,9 @@ private:
 
     // ButtonHole *buttonHole;
     std::vector<ButtonHole*> buttonHole;
+
+    bool m_uiReady = false;
+    bool m_recentPlaylistLoaded = false;
+    QTimer *m_displayTimer = nullptr;
 };
 #endif // MAINWINDOW_H
