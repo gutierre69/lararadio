@@ -26,6 +26,7 @@
 #include <QRandomGenerator>
 #include <QDesktopServices>
 #include <QFile>
+#include <QDirIterator>
 
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
@@ -409,6 +410,17 @@ void MainWindow::on_btn_add_item_clicked()
         if(filename=="")
             return;
 
+        if(type=="folder-music" || type=="folder-jingle"){
+            QStringList filters;
+            filters << "*.mp3" << "*.wav" << "*.ogg" << "*.flac" << "*.mp4"; // Add other formats as needed
+            QDirIterator audioFileIt(filepath, filters, QDir::NoFilter, QDirIterator::Subdirectories);
+            QStringList audioFiles;
+            if (!audioFileIt.hasNext()) {
+                QMessageBox::warning(this, tr("Erro"), tr("Sem áudio na pasta selecionada!"));
+                return;
+            }
+        }
+
         filename = filename.remove(".mp3");
         filename = filename.remove(".wav");
         filename = filename.remove(".flac");
@@ -725,21 +737,25 @@ void MainWindow::next()
 
             if(type=="folder-music" || type=="folder-jingle"){
 
-                QDir audioDir( path );
                 QStringList filters;
                 filters << "*.mp3" << "*.wav" << "*.ogg" << "*.flac" << "*.mp4"; // Add other formats as needed
-                QStringList audioFiles = audioDir.entryList(filters, QDir::Files);
-
+                QDirIterator audioFileIt(path, filters, QDir::NoFilter, QDirIterator::Subdirectories);
+                QStringList audioFiles;
+                while (audioFileIt.hasNext()) {
+                    audioFiles << audioFileIt.next();
+                }
 
                 if (!audioFiles.isEmpty()) {
                     int randomIndex = QRandomGenerator::global()->bounded(audioFiles.size());
-                    QString selectedFile = audioFiles.at(randomIndex);
-                    path = audioDir.absoluteFilePath(selectedFile);
+                    path = audioFiles.at(randomIndex);
 
                     if(type=="folder-music")  type = "music";
                     if(type=="folder-jingle")  type = "jingle";
-
-
+                } else {
+                    current_play = (current_play + 1) % playlist.size();
+                    qWarning() << "No audio files found in folder:" << path << "- skipping item";
+                    next();
+                    return;
                 }
 
 
