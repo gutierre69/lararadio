@@ -812,6 +812,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>Version: </translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="419"/>
+        <source>Sem áudio na pasta selecionada!</source>
+        <translation>No audio in the selected folder!</translation>
+    </message>
+    <message>
         <source>Carregar Audio</source>
         <translation type="vanished">Load Audio</translation>
     </message>
