@@ -300,10 +300,10 @@ void MainWindow::audioOptionsMenu(QPoint pos)
 
     QMenu *menu = new QMenu(this);
 
-    QAction* markHasNext = new QAction(QIcon(":/images/icons/go-last.svg"), "Marcar como Próximo", this);
-    QAction* playThis = new QAction(QIcon(":/images/icons/media-playback-start.svg"), "Tocar Este", this);
-    QAction* monitorThis = new QAction(QIcon(":/images/icons/preferences-desktop-sound.svg"), "Pré Escuta", this);
-    QAction* deleteThis = new QAction(QIcon(":/images/icons/edit-delete.svg"), "Apagar", this);
+    QAction* markHasNext = new QAction(QIcon(":/images/icons/go-last.svg"), tr("Marcar como Próximo"), this);
+    QAction* playThis = new QAction(QIcon(":/images/icons/media-playback-start.svg"), tr("Tocar Este"), this);
+    QAction* monitorThis = new QAction(QIcon(":/images/icons/preferences-desktop-sound.svg"), tr("Pré Escuta"), this);
+    QAction* deleteThis = new QAction(QIcon(":/images/icons/edit-delete.svg"), tr("Apagar"), this);
     menu->addAction( playThis );
     menu->addAction( markHasNext );
     menu->addAction( monitorThis );
