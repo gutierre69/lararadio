@@ -81,6 +81,26 @@
 <context>
     <name>ButtonHole</name>
     <message>
+        <location filename="../buttonhole.cpp" line="45"/>
+        <source>Carregar Áudio</source>
+        <translation>Load Audio</translation>
+    </message>
+    <message>
+        <location filename="../buttonhole.cpp" line="46"/>
+        <source>Tocar Áudio</source>
+        <translation>Play Audio</translation>
+    </message>
+    <message>
+        <location filename="../buttonhole.cpp" line="47"/>
+        <source>Parar Áudio</source>
+        <translation>Stop Audio</translation>
+    </message>
+    <message>
+        <location filename="../buttonhole.cpp" line="48"/>
+        <source>Apagar Áudio</source>
+        <translation>Delete Audio</translation>
+    </message>
+    <message>
         <location filename="../buttonhole.cpp" line="57"/>
         <source>Carregar Audio</source>
         <translation type="unfinished">Load Audio</translation>
@@ -810,6 +830,26 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <location filename="../mainwindow.cpp" line="161"/>
         <source>Versão: </source>
         <translation>Version: </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="303"/>
+        <source>Marcar como Próximo</source>
+        <translation>Make Next</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="304"/>
+        <source>Tocar Este</source>
+        <translation>Play</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="305"/>
+        <source>Pré Escuta</source>
+        <translation>Preview</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="306"/>
+        <source>Apagar</source>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Carregar Audio</source>

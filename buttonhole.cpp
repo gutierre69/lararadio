@@ -42,10 +42,10 @@ void ButtonHole::bntContextMenu(QPoint pos)
 {
     QMenu *menu = new QMenu(this);
 
-    QAction* loadAudio = new QAction(QIcon(":/images/icons/go-bottom.svg"), "Carregar Áudio", this);
-    QAction* playAudio = new QAction(QIcon(":/images/icons/media-playback-start.svg"), "Tocar Áudio", this);
-    QAction* stopAudio = new QAction(QIcon(":/images/icons/media-playback-stop.svg"), "Parar Áudio", this);
-    QAction* deleteAudio = new QAction(QIcon(":/images/icons/edit-delete.svg"), "Apagar Áudio", this);
+    QAction* loadAudio = new QAction(QIcon(":/images/icons/go-bottom.svg"), tr("Carregar Áudio"), this);
+    QAction* playAudio = new QAction(QIcon(":/images/icons/media-playback-start.svg"), tr("Tocar Áudio"), this);
+    QAction* stopAudio = new QAction(QIcon(":/images/icons/media-playback-stop.svg"), tr("Parar Áudio"), this);
+    QAction* deleteAudio = new QAction(QIcon(":/images/icons/edit-delete.svg"), tr("Apagar Áudio"), this);
     menu->addAction( loadAudio );
     menu->addAction( playAudio );
     menu->addAction( stopAudio );
