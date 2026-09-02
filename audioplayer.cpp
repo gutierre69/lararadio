@@ -141,6 +141,13 @@ void AudioPlayer::setBuffer(QAudioBufferOutput *output)
     player->setAudioBufferOutput(output);
 }
 
+// Aponta a saída do player pra um sink específico (ex: o sink virtual
+// "broadcast"). Sem chamada, fica no dispositivo padrão do sistema.
+void AudioPlayer::setOutputDevice(const QAudioDevice &device)
+{
+    audioOutput->setDevice(device);
+}
+
 bool AudioPlayer::isValidMediaFile(const QString &path)
 {
     QFileInfo fi(path);

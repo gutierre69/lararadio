@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 # Versão principal
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 4)
+set(PROJECT_VERSION_PATCH 7)
 
 # Caminho do arquivo de build number
 # set(BUILD_NUMBER_FILE "${CMAKE_CURRENT_BINARY_DIR}/build_number.txt")
@@ -43,7 +43,7 @@ project(appLaraRadio VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Widgets Multimedia MultimediaWidgets)
+find_package(Qt6 REQUIRED COMPONENTS Quick Widgets Multimedia MultimediaWidgets Network)
 set(QT_USE_QTMULTIMEDIA TRUE)
 set(QT_USE_QTMULTIMEDIAWIDGETS TRUE)
 set(QT_DEBUG_PLUGINS TRUE)
@@ -68,6 +68,7 @@ qt_add_qml_module(appLaraRadio
 
         RESOURCES mainwindow.ui
         SOURCES mainwindow.h mainwindow.cpp
+        SOURCES playlisttree.h
         SOURCES audioplayer.cpp
         SOURCES audioplayer.h
         SOURCES timerclock.h
@@ -103,6 +104,7 @@ target_link_libraries(appLaraRadio
     Qt6::Widgets
     Qt6::Multimedia
     Qt6::MultimediaWidgets
+    Qt6::Network
     tag
 )
 

@@ -37,6 +37,7 @@ class AudioPlayer: public QObject
         void fadeIn();
         void fade();
         void setBuffer(QAudioBufferOutput *output);
+        void setOutputDevice(const QAudioDevice &device);
         bool hasError() const { return m_hasError; }
         static bool isValidMediaFile(const QString &path);
 

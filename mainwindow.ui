@@ -30,7 +30,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTreeWidget" name="audio_list">
+   <widget class="PlaylistTree" name="audio_list">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -40,13 +40,13 @@
      </rect>
     </property>
     <property name="showDropIndicator" stdset="0">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="dragEnabled">
      <bool>false</bool>
     </property>
     <property name="dragDropMode">
-     <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
+     <enum>QAbstractItemView::DragDropMode::DragDrop</enum>
     </property>
     <property name="defaultDropAction">
      <enum>Qt::DropAction::MoveAction</enum>
@@ -55,7 +55,7 @@
      <bool>true</bool>
     </property>
     <property name="selectionMode">
-     <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+     <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
     </property>
     <property name="selectionBehavior">
      <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
@@ -389,6 +389,19 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <normaloff>:/images/icons/media-skip-forward.svg</normaloff>:/images/icons/media-skip-forward.svg</iconset>
     </property>
    </widget>
+   <widget class="QCheckBox" name="chk_repeat">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>124</y>
+      <width>70</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Repeat</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="audio_clock">
     <property name="geometry">
      <rect>
@@ -506,6 +519,35 @@ QSlider::add-page:vertical {
       <width>24</width>
       <height>24</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_stream">
+    <property name="geometry">
+     <rect>
+      <x>475</x>
+      <y>160</y>
+      <width>51</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resources.qrc">
+      <normaloff>:/images/icons/preferences-system-sharing.png</normaloff>:/images/icons/preferences-system-sharing.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>24</width>
+      <height>24</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="toolTip">
+     <string>Ligar/Desligar Stream (Icecast/Shoutcast)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_add_item">
@@ -816,4 +858,11 @@ QSlider::add-page:vertical {
   <include location="resources.qrc"/>
  </resources>
  <connections/>
+ <customwidgets>
+  <customwidget>
+   <class>PlaylistTree</class>
+   <extends>QTreeWidget</extends>
+   <header>playlisttree.h</header>
+  </customwidget>
+ </customwidgets>
 </ui>

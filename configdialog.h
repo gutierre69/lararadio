@@ -6,6 +6,7 @@
 #include <QCoreApplication>
 #include <QFileDialog>
 #include <QDialogButtonBox>
+#include <QDir>
 
 namespace Ui {
 class ConfigDialog;
@@ -27,6 +28,10 @@ private slots:
     void on_btn_searchMusicPath_clicked();
     void on_btn_searchJinglePath_clicked();
     void on_btn_searchTimePath_clicked();
+    void on_btn_export_log_clicked();
+
+signals:
+    void exportLogRequested();
 
 private:
     Ui::ConfigDialog *ui;
