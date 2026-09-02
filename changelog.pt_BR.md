@@ -8,6 +8,38 @@ Fork: https://github.com/brdelphus/lararadio
 
 ---
 
+## [1.0.7] — 2026-09-02 — Botão Loop: VU meter, roteamento de saída e now playing
+
+### Corrigido
+
+- **VU meter ficava mudo com o Loop tocando** — o `QMediaPlayer` do loop
+  não tinha buffer de áudio alimentando o medidor. O novo
+  `ButtonHole::setBuffer()` compartilha o mesmo `QAudioBufferOutput` já
+  usado pelos players da playlist, então o VU da UI reage à reprodução
+  do loop também.
+- **O título "NO AR" só acendia (vermelho) com a playlist tocando** —
+  apertar o Loop (que assume o programa com fade out da playlist)
+  deixava o título do grupo cinza mesmo com áudio no ar. A checagem de
+  estado do `flash()` agora observa também o player do loop, então o
+  indicador vermelho reflete o loop.
+
+### Alterado
+
+- **Todo som gerado pelo app agora respeita o device de saída
+  configurado** — os dez ButtonHoles e o Loop ganharam
+  `ButtonHole::setOutputDevice()` e são roteados ao `audio/output_device`
+  no startup (antes só os dois players da playlist e o time player
+  eram). Combinado com um sink combinado do PulseAudio
+  (`lr_combo` = broadcast + saída padrão), toda a reprodução vai ao
+  broadcast do Icecast *e* ao fone do operador ao mesmo tempo. A
+  pré-escuta mantém o `audio/preview_device` próprio e nunca vai ao ar.
+- **Now playing reflete o Loop** — apertar o Loop (que assume o
+  programa) agora atualiza o label "NO AR – Reproduzindo agora" e a
+  metadata do Icecast. A `updateStreamMetadata()` ganhou um título de
+  override opcional; vazio mantém o comportamento da playlist.
+
+---
+
 ## [1.0.6] — 2026-08-17 — Pré-escuta, streaming, i18n endurecido
 
 ### Adicionado

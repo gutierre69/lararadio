@@ -8,6 +8,39 @@ Fork: https://github.com/brdelphus/lararadio
 
 ---
 
+## [1.0.7] — 2026-09-02 — Loop button: VU meter, output routing and now playing
+
+### Fixed
+
+- **VU meter stayed silent while the Loop button played** — the loop's
+  `QMediaPlayer` had no audio buffer feeding the meter. New
+  `ButtonHole::setBuffer()` shares the same `QAudioBufferOutput` already
+  used by the playlist players, so the UI level meters react to loop
+  playback too.
+- **"NO AR" title only turned red while the playlist was playing** —
+  pressing Loop (which takes over the program with a playlist fade-out)
+  left the group title grey even though audio was on air. The `flash()`
+  state check now also watches the loop player, so the red on-air
+  indicator reflects the loop as well.
+
+### Changed
+
+- **Every sound the app generates now honors the configured output
+  device** — all ten ButtonHoles and the Loop gained
+  `ButtonHole::setOutputDevice()` and are routed to `audio/output_device`
+  at startup (previously only the two playlist players and the time
+  player were). Combined with a PulseAudio combine sink
+  (`lr_combo` = broadcast + default output), all playback goes to the
+  Icecast broadcast *and* to the operator's headphones simultaneously.
+  The pre-listen player keeps its own `audio/preview_device` and never
+  goes on air.
+- **Now playing reflects the Loop** — pressing Loop (which takes over
+  the program) now updates the "NO AR – Reproduzindo agora" label and
+  the Icecast metadata. `updateStreamMetadata()` gained an optional
+  override title; empty keeps the playlist behavior.
+
+---
+
 ## [1.0.6] — 2026-08-17 — Preview, streaming, i18n hardening
 
 ### Added
