@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 # Versão principal
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 6)
+set(PROJECT_VERSION_PATCH 7)
 
 # Caminho do arquivo de build number
 # set(BUILD_NUMBER_FILE "${CMAKE_CURRENT_BINARY_DIR}/build_number.txt")
