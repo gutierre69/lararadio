@@ -104,7 +104,7 @@ private slots:
     void changeLanguage(QString lang);
     void audioOptionsMenu(QPoint pos);
     void updateStreamButtonState();
-    void updateStreamMetadata();
+    void updateStreamMetadata(const QString &overrideTitle = QString());
 
     void unSelectedJingle();
     void unSelectedFiles();

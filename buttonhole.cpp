@@ -38,6 +38,18 @@ void ButtonHole::setLoopMode(bool loop)
     loopMode = loop;
 }
 
+void ButtonHole::setOutputDevice(const QAudioDevice &device)
+{
+    if (audioOutput && !device.isNull())
+        audioOutput->setDevice(device);
+}
+
+void ButtonHole::setBuffer(QAudioBufferOutput *output)
+{
+    if (output)
+        player->setAudioBufferOutput(output);
+}
+
 void ButtonHole::setPositon(int newX, int newY)
 {
     //button->setGeometry(newX, newY, 60, 60);

@@ -178,17 +178,21 @@ void MainWindow::init()
     // Sink de saída principal (audio/output_device): ex. "broadcast" para
     // mandar a programação ao Icecast via ffmpeg. Vazio = padrão do sistema.
     const QString mainDev = settings->value("audio/output_device").toString();
+    QAudioDevice mainOutputDevice;
     if (!mainDev.isEmpty()) {
         for (const QAudioDevice &d : QMediaDevices::audioOutputs()) {
             if (d.id().compare(mainDev.toUtf8(), Qt::CaseInsensitive) == 0
                 || d.description().compare(mainDev, Qt::CaseInsensitive) == 0) {
+                mainOutputDevice = d;
                 audioplayer1.setOutputDevice(d);
                 audioplayer2.setOutputDevice(d);
                 timeAudioOutput->setDevice(d);
-                break;
             }
         }
     }
+    qDebug() << "ROUTE-DEBUG mainDev=" << mainDev
+             << "| audioOutputs=" << QMediaDevices::audioOutputs().size()
+             << "| mainOutputDevice null=" << mainOutputDevice.isNull();
 
     // Botão de stream desabilitado até haver config válida (stream/*).
     updateStreamButtonState();
@@ -311,6 +315,7 @@ void MainWindow::init()
         bh->setGeometry(340 + ((bi-1)*70), 574, 60, 40);
         bh->setBtnText(QString::number( bi ));
         bh->setBtnKey(QString::number( bi ));
+        if (!mainOutputDevice.isNull()) bh->setOutputDevice(mainOutputDevice);
         bh->show();
 
         buttonHole.push_back( bh );
@@ -323,6 +328,8 @@ void MainWindow::init()
     loopBh->setBtnText(tr("Loop"));
     loopBh->setBtnKey("Loop");
     loopBh->setLoopMode(true);
+    if (!mainOutputDevice.isNull()) loopBh->setOutputDevice(mainOutputDevice);
+    loopBh->setBuffer(audioBufferOutput); // feed VU meter on loop playback
     loopBh->show();
 
     // Priority between loop and playlist: when the loop is pressed while the
@@ -331,6 +338,13 @@ void MainWindow::init()
         addLog(tr("LOOP acionado (fade out da playlist)"));
         if (audioplayer1.isPlaying()) audioplayer1.fadeOut();
         if (audioplayer2.isPlaying()) audioplayer2.fadeOut();
+        // "No ar": o loop assumiu o programa — mostra o arquivo dele na UI
+        // e no Icecast (a playlist segue em fadeOut até o próximo play).
+        const QString loopName = QFileInfo(loopBh->getFilename()).fileName();
+        if (!loopName.isEmpty()) {
+            ui->current_audio->setText("<p align='center'>" + loopName + "</p>");
+            updateStreamMetadata(loopName);
+        }
     });
 
     connect(ui->chk_repeat, &QCheckBox::toggled, this, [=](bool checked) { repeat = checked; });
@@ -694,7 +708,7 @@ void MainWindow::updateStreamButtonState()
 // protocolo próprio de metadata, não suportado aqui.
 // Retry: logo após ligar o stream o ffmpeg ainda não conectou (mount não
 // existe) e o Icecast rejeita — se o HTTP não for 2xx, re-agenda em 2s.
-void MainWindow::updateStreamMetadata()
+void MainWindow::updateStreamMetadata(const QString &overrideTitle)
 {
     if (!m_streamOn || !m_net) return;
     // Já tem um retry pendente? Esta chamada é o retry (timer singleShot já
@@ -703,8 +717,13 @@ void MainWindow::updateStreamMetadata()
     if (m_metaRetryTimer->isActive()) return;
     const QString url = settings->value("stream/url").toString().trimmed();
     if (url.isEmpty() || url.contains("shoutcast://")) return;
-    if (current_play < 0 || current_play >= (int)playlist.size()) return;
-    const QString song = playlist[current_play].name;
+    // overrideTitle: o que está no ar fora da playlist (ex: loop button).
+    // Vazio = título da música atual da playlist.
+    QString song = overrideTitle;
+    if (song.isEmpty()) {
+        if (current_play < 0 || current_play >= (int)playlist.size()) return;
+        song = playlist[current_play].name;
+    }
     if (song.isEmpty()) return;
 
     // host:porta + mount a partir da URL (ex: localhost:9000/live → /live).
@@ -1392,7 +1411,9 @@ void MainWindow::flash()
         ui->btn_next->setStyleSheet("");
     }
 
-    if(isPlaying){
+    // "NO AR" lights up red while anything is on air: the playlist
+    // (isPlaying) or the loop button (which takes over the program).
+    if(isPlaying || (loopBh && loopBh->isPlaying())){
         ui->groupBox->setStyleSheet("QGroupBox:title {background-color: red;}");
     } else {
         ui->groupBox->setStyleSheet("");
